@@ -25,33 +25,28 @@
         <div class="card quizcard mb-3">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img src="..." class="img-fluid rounded-start" alt="...">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <div class="card mb-2">
-                            <div class="card-body">
-                                Antwort
+                        <h5 class="card-title" id="questiontext">Card title</h5>
+                        <div class="answerField card mb-2">
+                            <div class="card-body" id="answer_1" onclick="answer('answer_1')">
                             </div>
                         </div>
-                        <div class="card mb-2">
-                            <div class="card-body">
-                                Antwort
+                        <div class="answerField card mb-2">
+                            <div class="card-body" id="answer_2" onclick="answer('answer_2')">
                             </div>
                         </div>
-                        <div class="card mb-2">
-                            <div class="card-body">
-                                Antwort
+                        <div class="answerField card mb-2">
+                            <div class="card-body" id="answer_3" onclick="answer('answer_3')">
                             </div>
                         </div>
-                        <div class="card mb-2">
-                            <div class="card-body">
-                                Antwort
+                        <div class="answerField card mb-2">
+                            <div class="card-body" id="answer_4" onclick="answer('answer_4')">
                             </div>
                         </div>
                         <div class="question-footer">
-                            <span><b>1</b> von <b>5</b> Fragen</span>
+                            <span><b>1</b> von <b id="pageNumber">5</b> Fragen</span>
                             <button type="button" class="btn btn-primary">Nächste Frage</button>
                         </div>
                     </div>

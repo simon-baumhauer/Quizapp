@@ -36,18 +36,20 @@ let currentQuestion = 0;
 
 function init() {
     document.getElementById('pageNumber').innerHTML = questions.length;
+    document.getElementById('questionNumber1.0').innerHTML = questions.length;
     showQuestion();
 }
 
 function showQuestion() {
-
     if (currentQuestion >= questions.length) {
         document.getElementById('endSrceen').style = '';
         document.getElementById('questionBody').style = 'display: none';
         document.getElementById('score').innerHTML = `${currentQuestion}/`;
+        document.getElementById('progress-bar').innerHTML = `100%`;
+        document.getElementById('progress-bar').style = `width: 100%;`;
     } else {
-        document.getElementById('questionNumber1.0').innerHTML = questions.length;
-        let percent = currentQuestion / questions.length;
+
+        let percent = (currentQuestion) / questions.length;
         percent = Math.round(percent * 100);
         document.getElementById('progress-bar').innerHTML = `${percent}%`;
         document.getElementById('progress-bar').style = `width: ${percent}%;`;
@@ -71,7 +73,6 @@ function answer(selection) {
 
     if (selectedQuestionNumber == question['right_answer']) {
         document.getElementById(selection).parentNode.classList.add('bg-success');
-        score++;
     } else {
         document.getElementById(selection).parentNode.classList.add('bg-danger');
         document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
@@ -98,4 +99,11 @@ function resetButtons() {
     document.getElementById('answer_3').parentNode.classList.remove('bg-danger');
     document.getElementById('answer_4').parentNode.classList.remove('bg-success');
     document.getElementById('answer_4').parentNode.classList.remove('bg-danger');
+}
+
+function replay() {
+    currentQuestion = 0;
+    document.getElementById('questionBody').style = '';
+    document.getElementById('endSrceen').style = 'display: none';
+    init();
 }

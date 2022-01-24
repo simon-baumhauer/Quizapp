@@ -7,6 +7,14 @@ let questions = [{
         "right_answer": 3
     },
     {
+        "question": "etwas neues?",
+        "answer_1": "Robbie Williams",
+        "answer_2": "Lady Gaga",
+        "answer_3": "Tim Berners-Lee",
+        "answer_4": "Justin Bieber",
+        "right_answer": 3
+    },
+    {
         "question": "Wer hat HTML erfunden?",
         "answer_1": "Robbie Williams",
         "answer_2": "Lady Gaga",
@@ -28,18 +36,31 @@ let currentQuestion = 0;
 
 function init() {
     document.getElementById('pageNumber').innerHTML = questions.length;
-
     showQuestion();
 }
 
 function showQuestion() {
-    let question = questions[currentQuestion];
 
-    document.getElementById('questiontext').innerHTML = question['question']
-    document.getElementById('answer_1').innerHTML = question['answer_1']
-    document.getElementById('answer_2').innerHTML = question['answer_2']
-    document.getElementById('answer_3').innerHTML = question['answer_3']
-    document.getElementById('answer_4').innerHTML = question['answer_4']
+    if (currentQuestion >= questions.length) {
+        document.getElementById('endSrceen').style = '';
+        document.getElementById('questionBody').style = 'display: none';
+        document.getElementById('score').innerHTML = `${currentQuestion}/`;
+    } else {
+        document.getElementById('questionNumber1.0').innerHTML = questions.length;
+        let percent = currentQuestion / questions.length;
+        percent = Math.round(percent * 100);
+        document.getElementById('progress-bar').innerHTML = `${percent}%`;
+        document.getElementById('progress-bar').style = `width: ${percent}%;`;
+
+
+        let question = questions[currentQuestion];
+        document.getElementById('questionNumber').innerHTML = currentQuestion + 1;
+        document.getElementById('questionText').innerHTML = question['question']
+        document.getElementById('answer_1').innerHTML = question['answer_1']
+        document.getElementById('answer_2').innerHTML = question['answer_2']
+        document.getElementById('answer_3').innerHTML = question['answer_3']
+        document.getElementById('answer_4').innerHTML = question['answer_4']
+    }
 }
 
 function answer(selection) {
@@ -50,9 +71,31 @@ function answer(selection) {
 
     if (selectedQuestionNumber == question['right_answer']) {
         document.getElementById(selection).parentNode.classList.add('bg-success');
+        score++;
     } else {
         document.getElementById(selection).parentNode.classList.add('bg-danger');
         document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
     }
     document.getElementById('next-button').disabled = false;
+    init();
+}
+
+function nextQuestion() {
+    document.getElementById('questionNumber').innerHTML =
+        currentQuestion++;
+    resetButtons()
+    document.getElementById('next-button').disabled = true;
+    showQuestion();
+}
+
+function resetButtons() {
+    document.getElementById('next-button').disabled = true;
+    document.getElementById('answer_1').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_1').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_2').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_2').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_3').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_3').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_4').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_4').parentNode.classList.remove('bg-danger');
 }
